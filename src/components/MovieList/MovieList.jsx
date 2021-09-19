@@ -13,6 +13,9 @@ function MovieList() {
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRES' });
+    }, []);
 
     return (
         <main>

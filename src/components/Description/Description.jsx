@@ -27,11 +27,13 @@ function Description (){
     
     return(
         <>
+        <div>
         <h2>{movie?.title}</h2>
-        <img scr={movie?.poster}/>
+        <img src={movie?.poster}/>
         <p>Genre: {(movie?.genres).join(', ')}</p>
         <p>{movie?.description}</p>
         <button onClick={pageChange}>Cancel</button>
+        </div>
         </>
     )
 }
