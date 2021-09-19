@@ -5,29 +5,33 @@ import { useHistory } from 'react-router-dom';
 
 function Description (){
     const history = useHistory();
-    let allMovies = useSelector(store => store.allMovies);
+    let genres = useSelector(store => store.genres);
+    console.log('THIS IS ALL THE MOVEIS AND GENRES:', genres)
     
     const pageChange = () => {
-        history.push('/')
+        history.push('/');
+    }
+        
 
     let params = useParams();
     console.log(params);
 
     let {movieId} = params;
-    let movie = allMovies.find(movie => movie.id === Number(movieId));
-    console.log(`Found this movie: `, movie);
+    let movie = genres.find(movie => movie.id === Number(movieId));
+    console.log('Found this movie:', movie);
 
     if (!movie) {
         return <h2>Invalid Movie ID</h2>
     }
 
-    }
+    
     return(
         <>
         <h2>{movie?.title}</h2>
-        <h3>{movie?.poster}</h3>
-        <h3>{movie?.description}</h3>
-        <button onClick={(pageChange)}>Cancel</button>
+        <img scr={movie?.poster}/>
+        <p>Genre: {(movie?.genres).join(', ')}</p>
+        <p>{movie?.description}</p>
+        <button onClick={pageChange}>Cancel</button>
         </>
     )
 }

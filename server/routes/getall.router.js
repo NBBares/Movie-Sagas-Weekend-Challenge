@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/getall', (req, res) => {
+router.get('/', (req, res) => {
     const query = `SELECT movies.id, movies.title, movies.poster, movies.description, array_agg(name) as genres FROM movies
   JOIN movies_genres ON movies_genres.movie_id = movies.id
   JOIN genres on movies_genres.genre_id = genres.id

@@ -14,43 +14,43 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_GENRES', fetchAllGenres);
+    yield takeEvery('SET_GENRES', fetchAllGenres);
     yield takeEvery('ADD_MOVIES', addMovie);
+    // yield takeEvery('SET_ALLMOVIES', fetchCompleteMovies);
 }
 
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
-        const movies = yield axios.get('/api/movie');
+        const movies = yield axios.get('/api/movie/');
         console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
         console.log('get all error');
-    }
-        
+    }      
 }
 
-function* fetchAllGenres(action) {
-    console.log('in the fetchGenres', action);
+
+function* fetchAllGenres() {
     try {
         //SETTING UP A RESPONSE THAT'LL GET THE DATA FOR US
-        const response = yield axios.get(`/api/genre`);
+        const response = yield axios.get('/api/genre/getall');
+        console.log('GET ALL COMPLETED MOVIES:', response.data)
         //  setting the dispatch on
-        yield put({ type: "FETCH_GENRES", payload: response.data });
+        yield put({ type: 'SET_GENRES', payload: response.data });
     } catch (err) {
-        console.log("error getting genres", err);
+        console.log('error getting genres', err);
     }
 }
 
 function* addMovie(action) {
     console.log("Inside the ADD_MOVIE SAGA", action);
     try {
-        yield axios.post("/api/movie", action.payload);
-        yield put({ type: "FETCH_MOVIES" });
-        // yield put({type: "FETCH_GENRES"});
+        yield axios.post('/api/movie', action.payload);
+        yield put({ type: 'FETCH_MOVIES' });
     } catch (err) {
-        console.log("Error FETCHING MOVIES for post", err);
+        console.log('Error FETCHING MOVIES for post', err);
     }
 }
 
