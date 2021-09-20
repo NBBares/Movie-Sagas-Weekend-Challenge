@@ -4,13 +4,17 @@ import { useHistory } from 'react-router-dom';
 
 function AddMovie () {
     const dispatch= useDispatch();
+    //inputs for the form that create a single object for the database to accept
     const [inputMovie, setInputMovie] = useState({title:'', poster:'', description:'', genre_id:0});
     const history = useHistory();
 
+    //form logic
     const onSubmit = (event) => {
         console.log("Movie inputs are,", inputMovie);
+        //prevent form from submitting early
         event.preventDefault();
-
+        
+        //calls the add movie saga and sends the information through the index
         dispatch({
             type: 'ADD_MOVIES',
             payload: 
@@ -19,9 +23,12 @@ function AddMovie () {
         })
          
         setInputMovie('');
+
+        //to send to home page
         history.push('/');
     }
 
+    //to send to home page
     const pageChange = () => {
         history.push('/')
     }

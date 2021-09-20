@@ -4,15 +4,19 @@ import './MovieList.css'
 import { useHistory } from 'react-router-dom';
 import {HashRouter as Router, NavLink} from 'react-router-dom';
 
+//function that runs the movie list logic
 function MovieList() {
 
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
+    //calls the saga to fetch all movies
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
+
+    //calls the saga to fetch all movies and genres associated with them
     useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' });
     }, []);
