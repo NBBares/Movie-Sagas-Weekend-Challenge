@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+//route for getting genres
 router.get('/', (req, res) => {
 
     const query = `SELECT * FROM genres ORDER BY "name" ASC`;
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
       })
 });
 
+//route for getting all movies and genres through a conjoined object
 router.get('/getall', (req, res) => {
   const query = `SELECT movies.id, movies.title, movies.poster, movies.description, array_agg(name) as genres FROM movies
 JOIN movies_genres ON movies_genres.movie_id = movies.id
