@@ -24,6 +24,11 @@ CREATE TABLE "movies_genres" (
   "genre_id" INT REFERENCES "genres" NOT NULL
 );
 
+SELECT movies.id, movies.title, movies.poster, movies.description, array_agg(name) as genres FROM movies
+JOIN movies_genres ON movies_genres.movie_id = movies.id
+JOIN genres on movies_genres.genre_id = genres.id
+GROUP BY movies.id, movies.title, movies.poster, movies.description;
+
 --------[ DATA! ]---------
 
 -- starter movies
