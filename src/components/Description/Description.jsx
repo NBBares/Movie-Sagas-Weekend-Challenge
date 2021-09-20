@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import './Description.css'
 
 function Description (){
     const history = useHistory();
@@ -32,9 +33,9 @@ function Description (){
     
     return(
         <>
-        <div>
+        <div className="des">
         <h2>{movie?.title}</h2>
-        <img src={movie?.poster}/>
+        <img className="desimg" src={movie?.poster}/>
         <p>Genre: {(movie?.genres).join(', ')}</p>
         <p>{movie?.description}</p>
         <button onClick={pageChange}>Cancel</button>

@@ -32,7 +32,7 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <img onClick={() => history.push(`/description/${movie.id}`)}src={movie.poster} alt={movie.title}/>
+                            <img onClick={() => history.push(`/description/${movie.id}`)}src={movie.poster} alt={movie.title}  className="poster"/>
                         </div>
                     );
                 })}
